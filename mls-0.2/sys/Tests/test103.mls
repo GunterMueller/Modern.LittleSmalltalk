@@ -1,0 +1,8 @@
+Class Test Object origin corner
+Methods Test
+merge: aRectangle
+  | minPoint maxPoint |
+  minPoint <- origin min: aRectangle origin.
+  maxPoint <- corner max: aRectangle corner.
+  ^Test new; origin: minPoint corner: maxPoint
+]

@@ -1,0 +1,5 @@
+Class Test Object origin corner
+Methods Test
+intersects: aRectangle
+  ^(origin max: aRectangle origin) < (corner min: aRectangle corner)
+]

@@ -1,0 +1,109 @@
+*
+* Magnitude.mls -- the magnitude classes
+*
+
+CLASS Magnitude SUBCLASSOF Object
+CLASS Character SUBCLASSOF Magnitude
+CLASS Number SUBCLASSOF Magnitude
+CLASS Integer SUBCLASSOF Number
+CLASS ShortInteger SUBCLASSOF Integer
+CLASS Float SUBCLASSOF Number
+
+CLASSMETHODS Character
+    withValue: anInteger
+        "Answer the character with ASCII value anInteger."
+        ^<! 57 anInteger !>
+|
+    newline
+        "Answer a newline character."
+        ^self withValue: 10
+|
+    digit: aDigit
+        "Answer a Character which represents aDigit."
+        ^self withValue: $0 asciiValue + aDigit
+]
+
+METHODS Character
+    output
+        "Output the receiver to the display."
+        <! 134 self !>
+|
+    asString
+        "Answer a String with a single character, the receiver."
+        ^String new: 1; at: 1 put: self
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        ^'$' , self asString
+|
+    isVowel
+        "Answer whether the receiver is a vowel."
+        ^'AEIOUaeiou' includes: self
+|
+    asciiValue
+        "Answer the ASCII value of the receiver."
+        ^<! 56 self !>
+]
+
+METHODS Integer
+    to: anInteger do: aBlock
+        "Evaluate aBlock for all integers between
+         the receiver and anInteger. Use an increment of 1."
+        | index |
+        index <- self.
+        [index <= anInteger] whileTrue:
+            [aBlock value: index.
+             index <- index + 1]
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        self < 0 ifTrue: [^'-' , self negated printString].
+        (self // 10) = 0 ifTrue: [^(Character digit: self) asString].
+        ^((self // 10) printString) , (Character digit: self \\ 10) asString
+]
+
+METHODS ShortInteger
+    negated
+        "Negate the receiver."
+        ^0 - self
+|
+    + aShortInteger
+        "Add aShortInteger to the receiver."
+        ^<! 60 self aShortInteger !>
+|
+    - aShortInteger
+        "Subtract aShortInteger from the receiver."
+        ^<! 61 self aShortInteger !>
+|
+    * aShortInteger
+        "Multiply the receiver with aShortInteger."
+        ^<! 68 self aShortInteger !>
+|
+    // aShortInteger
+        "Divide the receiver by aShortInteger, return the quotient."
+        ^<! 69 self aShortInteger !>
+|
+    \\ aShortInteger
+        "Divide the receiver by aShortInteger, return the remainder."
+        ^<! 67 self aShortInteger !>
+|
+    bitAnd: aShortInteger
+        "Combine the receiver with aShortInteger using bitwise 'and'."
+        ^<! 253 self aShortInteger !>
+|
+    bitOr: aShortInteger
+        "Combine the receiver with aShortInteger using bitwise 'or'."
+        ^<! 254 self aShortInteger !>
+|
+    bitXor: aShortInteger
+        "Combine the receiver with aShortInteger using bitwise 'xor'."
+        ^<! 255 self aShortInteger !>
+|
+    <= aShortInteger
+        "Answer whether the receiver is less than or equal to aShortInteger."
+        ^<! 252 self aShortInteger !>
+|
+    < aShortInteger
+        "Answer whether the receiver is less than aShortInteger."
+        ^<! 251 self aShortInteger !>
+]

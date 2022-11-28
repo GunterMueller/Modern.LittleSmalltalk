@@ -1,0 +1,92 @@
+*
+* Behavior.mls -- description of behavior, i.e. classes and metaclasses
+*
+
+CLASS Behavior SUBCLASSOF Object VARS name instType instSize methods superClass variables
+CLASS Class SUBCLASSOF Behavior
+CLASS Metaclass SUBCLASSOF Behavior
+
+CLASSMETHODS Behavior
+    isIndexableBit
+        "Return the bit indicating the object is indexable."
+        ^4
+|
+    hasPointersBit
+        "Return the bit indicating the object contains pointers."
+        ^2
+|
+    hasWordsBit
+        "Return the bit indicating the object contains words."
+        ^1
+]
+
+METHODS Behavior
+    addSelector: aSymbol withMethod: aMethod
+        "Add aMethod to the receiver's method dictionary.
+         Use aSymbol as the key."
+        methods at: aSymbol put: aMethod
+|
+    removeSelector: aSymbol
+        "Remove the method with selector aSymbol from the
+         receiver's method dictionary."
+        methods removeKey: aSymbol ifAbsent: []
+|
+    isVariable
+        "Answer whether instances of the receiver are variable in length."
+        ^(instType bitAnd: Behavior isIndexableBit) ~~ 0
+|
+    isFixed
+        "Answer whether instances of the receiver are fixed in length."
+        ^(instType bitAnd: Behavior isIndexableBit) == 0
+|
+    isPointers
+        "Answer whether instances of the receiver contain object pointers."
+        ^(instType bitAnd: Behavior hasPointersBit) ~~ 0
+|
+    isWords
+        "Answer whether instances of the receiver contain words."
+        ^(instType bitAnd: Behavior hasWordsBit) ~~ 0
+|
+    isBytes
+        "Answer whether instances of the receiver contain bytes."
+        self isPointers ifTrue: [^false].
+        self isWords ifTrue: [^false].
+        ^true
+|
+    new
+        "Create an instance of the receiver."
+        self isVariable ifTrue:
+            [self error: 'class creates instances of variable length'].
+        self isPointers ifTrue: [^<! 23 self instSize !>].
+        self isWords ifTrue: [^<! 21 self instSize !>].
+        ^<! 22 self instSize !>
+|
+    new: anInteger
+        "Create an instance of the receiver with
+         anInteger inexable instance variables."
+        self isVariable ifFalse:
+            [self error: 'class creates instances of fixed length'].
+        self isPointers ifTrue: [^<! 23 self anInteger !>].
+        self isWords ifTrue: [^<! 21 self anInteger !>].
+        ^<! 22 self anInteger !>
+|
+    superclass
+        "Answer the receiver's immediate superclass."
+        ^superClass
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        ^self name
+]
+
+METHODS Class
+    name
+        "Answer the name of the receiver."
+        ^name asString
+]
+
+METHODS Metaclass
+    name
+        "Answer the name of the receiver."
+        ^name asString , ' class'
+]

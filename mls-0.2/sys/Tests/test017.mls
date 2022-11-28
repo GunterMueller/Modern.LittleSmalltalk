@@ -1,0 +1,5 @@
+Class Test Object a b
+Methods Test
+  test
+    ^ 4 sin; cos + 5 and: 6; tan - 7 or: 8
+]

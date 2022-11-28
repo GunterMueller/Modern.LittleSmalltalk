@@ -1,0 +1,6 @@
+Class Test Object
+Methods Test
+  test: x and: y
+    | v w |
+    y
+]

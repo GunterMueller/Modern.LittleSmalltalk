@@ -1,0 +1,19 @@
+*
+* UndefinedObject.mls -- the class of 'nil'
+*
+
+CLASS UndefinedObject SUBCLASSOF Object
+
+METHODS UndefinedObject
+    isNil
+        "Return whether the receiver is nil."
+        ^true
+|
+    notNil
+        "Return whether the receiver is not nil."
+        ^false
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        ^'nil'
+]

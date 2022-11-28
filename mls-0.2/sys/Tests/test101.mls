@@ -1,0 +1,5 @@
+Class Test Object origin corner
+Methods Test
+extent: newExtent
+  corner <- origin + newExtent
+]

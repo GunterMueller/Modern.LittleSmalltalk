@@ -1,0 +1,5 @@
+*
+* Method.mls -- the class of all methods
+*
+
+Class Method Object text selector code literals argSize tempSize stackSize class

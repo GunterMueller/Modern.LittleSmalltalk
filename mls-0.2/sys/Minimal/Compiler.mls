@@ -1,0 +1,36 @@
+*
+* Compiler.mls -- the compiler class
+*
+
+CLASS Compiler SUBCLASSOF Object
+
+CLASSMETHODS Compiler
+    evaluate: aString
+        "Evaluate aString in the class UndefinedObject."
+        | method result |
+        method <- self compile: 'doIt ' , aString
+                       in: UndefinedObject
+                       lastValueNeeded: true.
+        UndefinedObject addSelector: #doIt
+                        withMethod: method.
+        result <- nil doIt.
+        UndefinedObject removeSelector: #doIt.
+        ^result
+|
+    compile: aString in: aClass
+        "Compile aString in aClass. Answer an instance of Method."
+        ^self compile: aString
+              in: aClass
+              lastValueNeeded: false
+|
+    compile: aString in: aClass lastValueNeeded: aBoolean
+        "Compile aString in aClass. If the flag lastValueNeeded
+         is false, compile with the usual return conventions:
+         if there is an explicit return statement at the end of
+         aString, return whatever is specified, else return the
+         receiver. If the flag is true, return the value of the
+         last expression in aString. This may be useful when
+         interactively evaluating expressions.
+         Answer an instance of Method."
+        ^<! 30 aString aClass aBoolean !>
+]

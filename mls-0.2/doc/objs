@@ -1,0 +1,11 @@
+
+Structure of some objects
+-------------------------
+
+Link
+  0: key		a Symbol
+  1: value		any object
+  2: nextLink		a Link
+
+Dictionary
+  0: hashTable		an Array of Links

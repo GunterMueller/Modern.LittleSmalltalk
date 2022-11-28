@@ -1,0 +1,5 @@
+Class Test Object a b
+Methods Test
+  test
+    ^ [:x | 3 + x]
+]

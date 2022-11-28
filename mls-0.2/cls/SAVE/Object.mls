@@ -1,0 +1,19 @@
+*
+* Object.mls -- the root class of all objects
+*
+
+Class Object nil
+
+Methods Object
+    halt
+        "Halt the execution."
+        self halt: 'Halt encountered.'
+|
+    halt: aString
+        "Halt the execution, printing aString."
+        <! 122 aString !>
+|
+    class
+        "Return the class of the receiver."
+        ^<! 11 self !>
+]

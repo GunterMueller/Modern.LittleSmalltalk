@@ -1,0 +1,11 @@
+Class Test Object a b
+Methods Test
+  test: x and: y
+    | m n |
+    a <- 42.
+    b <- 4.321.
+    m <- $A.
+    n <- 'a string'.
+    Glob1 <- #key.
+    Glob2 <- #(1 2 3 4).
+]

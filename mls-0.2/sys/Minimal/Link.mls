@@ -1,0 +1,43 @@
+*
+* Link.mls -- the link class
+*
+
+CLASS Link SUBCLASSOF Object VARS key value next
+
+CLASSMETHODS Link
+    key: aSymbol value: anObject next: aLink
+        "Create a new link with the given initialisation."
+        ^super new; key: aSymbol value: anObject next: aLink
+]
+
+METHODS Link
+    key
+        "Return the key of the receiver."
+        ^key
+|
+    key: aSymbol
+        "Set the key of the receiver to the argument, aSymbol."
+        key <- aSymbol
+|
+    value
+        "Return the value of the receiver."
+        ^value
+|
+    value: anObject
+        "Set the value of the receiver to the argument, anObject."
+        value <- anObject
+|
+    next
+        "Return the next link of the receiver."
+        ^next
+|
+    next: aLink
+        "Set the next link of the receiver to the argument, aLink."
+        next <- aLink
+|
+    key: aSymbol value: anObject next: aLink
+        "Initialize the receiver."
+        key <- aSymbol.
+        value <- anObject.
+        next <- aLink
+]

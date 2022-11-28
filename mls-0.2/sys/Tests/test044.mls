@@ -1,0 +1,6 @@
+Class Test Object a b
+Methods Test
+  test
+    ^ #(1 2.2 $3 '' 'four' five + six: seven:eight:
+        () (1 () 2 ('not empty') 3 ('') 4 ))
+]

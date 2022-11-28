@@ -1,0 +1,45 @@
+*
+* Context.mls -- the context classes
+*
+
+Class Context Object caller ip stack sp
+Class     MethodContext Context method receiver args temps
+Class     BlockContext Context argCount ipStart home
+
+Methods BlockContext
+    value
+        "Execute the receiver without any arguments."
+        ^<! 90 self !>
+|
+    value: arg1
+        "Execute the receiver with one argument."
+        ^<! 90 self arg1 !>
+|
+    value: arg1 value: arg2
+        "Execute the receiver with two arguments."
+        ^<! 90 self arg1 arg2 !>
+|
+    value: arg1 value: arg2 value: arg3
+        "Execute the receiver with three arguments."
+        ^<! 90 self arg1 arg2 arg3 !>
+|
+    whileFalse
+        "Repeatedly evaluate the receiver as
+         long as it answers false."
+        ^[self value] whileFalse: []
+|
+    whileFalse: aBlock
+        "Repeatedly evaluate aBlock as long as
+         the receiver evaluates to false."
+        ^self value ifFalse: [aBlock value. self whileFalse: aBlock]
+|
+    whileTrue
+        "Repeatedly evaluate the receiver as
+         long as it answers true."
+        ^[self value] whileTrue: []
+|
+    whileTrue: aBlock
+        "Repeatedly evaluate aBlock as long as
+         the receiver evaluates to true."
+        ^self value ifTrue: [aBlock value. self whileTrue: aBlock]
+]

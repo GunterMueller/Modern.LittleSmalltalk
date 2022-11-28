@@ -1,0 +1,315 @@
+*
+* Collection.mls -- the collection classes
+*
+
+CLASS Collection SUBCLASSOF Object
+CLASS SequenceableCollection SUBCLASSOF Collection
+CLASS ArrayedCollection SUBCLASSOF SequenceableCollection
+CLASS Array VARSUBCLASSOF ArrayedCollection
+CLASS WordArray VARWORDSUBCLASSOF ArrayedCollection
+CLASS ByteArray VARBYTESUBCLASSOF ArrayedCollection
+CLASS String VARBYTESUBCLASSOF ArrayedCollection
+CLASS Symbol VARBYTESUBCLASSOF String
+CLASS Dictionary SUBCLASSOF Collection VARS hashTable
+CLASS SystemDictionary SUBCLASSOF Dictionary
+
+METHODS ArrayedCollection
+    includes: anObject
+        "Answer whether the receiver contains anObject."
+        | size index |
+        size <- self size.
+        1 to: size do: [:i | (self at: i) == anObject ifTrue: [^true]].
+        ^false
+]
+
+METHODS WordArray
+    at: anIndex
+        "Return the word at position anIndex of the receiver."
+        ^<! 25 self anIndex !>
+|
+    at: anIndex put: aWord
+        "Set the word at position anIndex of the receiver to aWord."
+        <! 35 self anIndex aWord !>
+]
+
+METHODS ByteArray
+    at: anIndex
+        "Return the byte at position anIndex of the receiver."
+        ^<! 26 self anIndex !>
+|
+    at: anIndex put: aByte
+        "Set the byte at position anIndex of the receiver to aByte."
+        <! 36 self anIndex aByte !>
+]
+
+CLASSMETHODS String
+    input
+        "Input a string from the keyboard."
+        ^<! 130 !>
+]
+
+METHODS String
+    output
+        "Output the receiver to the display."
+        <! 133 self !>
+|
+    , aString
+        "Concatenate the receiver and the argument aString."
+        ^<! 24 self aString !>
+|
+    at: anIndex
+        "Return the character at position anIndex of the receiver."
+        ^<! 29 self anIndex !>
+|
+    at: anIndex put: aCharacter
+        "Set the character at position anIndex of the receiver to aCharacter."
+        <! 39 self anIndex aCharacter !>
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        ^'''' , self , ''''
+]
+
+METHODS Symbol
+    asString
+        "Return the characters of the receiver as a String."
+        | size string |
+        size <- self size.
+        string <- String new: size.
+        1 to: size do: [:i | string at: i put: (self at: i)].
+        ^string
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        ^'#' , self asString
+]
+
+METHODS Dictionary
+    getLinkFor: aSymbol fromBucket: bucket
+        "Get the link for aSymbol, from the bucket bucket.
+         Return the link, or nil if not found."
+        | link |
+        link <- hashTable at: bucket.
+        [link isNil] whileFalse:
+            [(link key == aSymbol) ifTrue: [^link].
+             link <- link next].
+        ^nil
+|
+    at: aSymbol ifAbsent: aBlock
+        "Return the object with aSymbol as key.
+         Evaluate aBlock if there is no such key."
+        | bucket link |
+        bucket <- (aSymbol hash \\ hashTable size) + 1.
+        link <- self getLinkFor: aSymbol fromBucket: bucket.
+        link isNil
+            ifTrue: [^aBlock value]
+            ifFalse: [^link value]
+|
+    at: aSymbol
+        "Return the object with aSymbol as key.
+         Show an error if there is no such key."
+        ^self at: aSymbol ifAbsent: [self error: 'key not found']
+|
+    at: aSymbol put: anObject
+        "Put anObject into the receiver under the key aSymbol."
+        | bucket link |
+        bucket <- (aSymbol hash \\ hashTable size) + 1.
+        link <- self getLinkFor: aSymbol fromBucket: bucket.
+        link isNil
+            ifTrue: [hashTable at: bucket
+                               put: (Link new; key: aSymbol
+                                               value: anObject
+                                               next: (hashTable at: bucket))]
+            ifFalse: [link value: anObject]
+|
+    removeKey: aSymbol ifAbsent: aBlock
+        "Remove the entry with key aSymbol from the receiver.
+         If there is none, evaluate aBlock."
+        | bucket link prev |
+        bucket <- (aSymbol hash \\ hashTable size) + 1.
+        link <- hashTable at: bucket.
+        link isNil ifTrue: [^aBlock value].
+        link key == aSymbol
+            ifTrue: [hashTable at: bucket put: link next.
+                     ^self].
+        prev <- link.
+        link <- link next.
+        [link isNil] whileFalse:
+            [link key == aSymbol
+                 ifTrue: [prev next: link next.
+                          ^self].
+             prev <- link.
+             link <- link next].
+        ^aBlock value
+]
+
+METHODS SystemDictionary
+    startUp
+        "Start the Modern Little Smalltalk system."
+        "self test1"
+        self topLevelLoop
+|
+    test1
+        "This is just a test."
+|
+    test2
+        "This is just a test."
+        ^self
+|
+    test3
+        "This is just a test."
+        ^nil
+|
+    test4
+        "This is just a test."
+        ^false
+|
+    test5
+        "This is just a test."
+        ^true
+|
+    test6
+        "This is just a test."
+        ^42
+|
+    test7
+        "This is just a test."
+        ^42.42
+|
+    test8
+        "This is just a test."
+        ^$a
+|
+    test9
+        "This is just a test."
+        ^'this is a string'
+|
+    test10
+        "This is just a test."
+        ^#aSymbol
+|
+    test11
+        "This is just a test."
+        ^SystemDictionary
+|
+    test12
+        "This is just a test."
+        ^#(1 2 3 (4) 5 6 7)
+|
+    test13
+        "This is just a test."
+        Class <- 42.
+        ^Class
+|
+    test14
+        "This is just a test."
+        self shutDown
+|
+    test15
+        "This is just a test."
+        self halt
+|
+    test16
+        "This is just a test."
+        ^7 class
+|
+    test17
+        "This is just a test."
+        ^3 + 4
+|
+    test18
+        "This is just a test."
+        ^3 - 4
+|
+    test19
+        "This is just a test."
+        ^3 * 4
+|
+    test20
+        "This is just a test."
+        ^14 // 4
+|
+    test21
+        "This is just a test."
+        ^14 \\ 4
+|
+    test22
+        "This is just a test."
+        ^[]
+|
+    test23
+        "This is just a test."
+        ^[] value
+|
+    test24
+        "This is just a test."
+        ^[42]
+|
+    test25
+        "This is just a test."
+        ^[42] value
+|
+    test26
+        "This is just a test."
+        [^42]
+|
+    test27
+        "This is just a test."
+        [^42] value
+|
+    test28
+        "This is just a test."
+        ^[:x :y :z | x + y + z] value: 1 value: 2 value: 3
+|
+    test29
+        "This is just a test."
+        ^Compiler compile: 'test ^42' in: Object
+|
+    test30
+        "This is just a test."
+        | tmp |
+        tmp <- #(10 20 30 40 50).
+        ^tmp at: 3
+|
+    test31
+        "This is just a test."
+        | tmp |
+        tmp <- #(10 20 30 40 50).
+        tmp at: 3 put: 42.
+        ^tmp at: 3
+|
+    test32
+        "This is just a test."
+        ^42 == 42
+|
+    test33
+        "This is just a test."
+        ^42 == 43
+|
+    test34
+        "This is just a test."
+        ^42 ~~ 42
+|
+    test35
+        "This is just a test."
+        ^42 ~~ 43
+|
+    test36
+        "This is just a test."
+        ^Compiler evaluate: '3 + 4'
+|
+    topLevelLoop
+        "This is the top level loop."
+        | inString result outString |
+        [true] whileTrue:
+            ['MLS> ' output.
+             inString <- String input.
+             result <- Compiler evaluate: inString.
+             outString <- result printString , Character newline asString.
+             outString output]
+|
+    quit
+        "Quit the Modern Little Smalltalk system."
+        <! 7 !>.
+        ^'Hello again!'
+]

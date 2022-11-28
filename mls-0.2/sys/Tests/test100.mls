@@ -1,0 +1,5 @@
+Class Test Object origin corner
+Methods Test
+center
+  ^origin + corner / 2
+]

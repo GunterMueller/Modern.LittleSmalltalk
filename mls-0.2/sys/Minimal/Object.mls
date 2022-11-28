@@ -1,0 +1,68 @@
+*
+* Object.mls -- the root class of all objects
+*
+
+CLASS Object SUBCLASSOF nil
+
+METHODS Object
+    error: aString
+        "Halt the execution. Print 'Error: ' followed by aString."
+        self halt: 'Error: ' , aString
+|
+    halt
+        "Halt the execution."
+        self halt: 'Halt encountered.'
+|
+    halt: aString
+        "Halt the execution, printing aString."
+        <! 132 aString !>
+|
+    class
+        "Return the class of the receiver."
+        ^<! 11 self !>
+|
+    hash
+        "Return the hash value of the receiver."
+        ^<! 13 self !>
+|
+    size
+        "Return the size of the receiver."
+        ^<! 12 self !>
+|
+    at: anIndex
+        "Return the object at position anIndex of the receiver."
+        ^<! 27 self anIndex !>
+|
+    at: anIndex put: anObject
+        "Set the object at position anIndex of the receiver to anObject."
+        <! 37 self anIndex anObject !>
+|
+    == anObject
+        "Check for identical objects."
+        ^<! 20 self anObject !>
+|
+    = anObject
+        "Check for equal objects. The default implementation is identity.
+         This may be overwritten by subclases."
+        ^self == anObject
+|
+    ~~ anObject
+        "Check for non-identical objects."
+        ^(self == anObject) not
+|
+    isNil
+        "Return whether the receiver is nil."
+        ^false
+|
+    notNil
+        "Return whether the receiver is not nil."
+        ^true
+|
+    printString
+        "Answer a String whose characters are a description of the receiver."
+        | classname |
+        classname <- self class name.
+        (classname at: 1) isVowel
+           ifTrue: [^'an ' , classname]
+           ifFalse: [^'a ' , classname]
+]

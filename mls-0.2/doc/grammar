@@ -1,0 +1,131 @@
+/*
+ * grammar -- MLS grammar
+ */
+
+
+method			: messagePattern temporaries statements
+			;
+
+messagePattern		: keywordPattern
+			| binaryPattern
+			| unaryPattern
+			;
+
+keywordPattern		: KEYWORD IDENT
+			| KEYWORD IDENT keywordPattern
+			;
+
+binaryPattern		: BINSEL IDENT
+			;
+
+unaryPattern		: IDENT
+			;
+
+temporaries		: /* empty */
+			| BAR tempList BAR
+			;
+
+tempList		: /* empty */
+			| IDENT tempList
+			;
+
+statements		: /* empty */
+			| CARET expression
+			| expression
+			| expression DOT statements
+			;
+
+expression		: IDENT ASSIGN expression
+			| cascadedExpr
+			;
+
+cascadedExpr		: keywordExpr
+			| keywordExpr cascade
+			;
+
+cascade			: SEMIC keywordCont
+			| SEMIC keywordCont cascade
+			;
+
+keywordCont		: binaryCont
+			| binaryCont keywordContAux
+			;
+
+keywordContAux		: KEYWORD binaryExpr
+			| KEYWORD binaryExpr keywordContAux
+			;
+
+binaryCont		: unaryCont
+			| binaryCont BINSEL unaryExpr
+			;
+
+unaryCont		: /* empty */
+			| unaryCont IDENT
+			;
+
+keywordExpr		: binaryExpr
+			| binaryExpr keywordExprAux
+			;
+
+keywordExprAux		: KEYWORD binaryExpr
+			| KEYWORD binaryExpr keywordExprAux
+			;
+
+binaryExpr		: unaryExpr
+			| binaryExpr BINSEL unaryExpr
+			;
+
+unaryExpr		: primary
+			| unaryExpr IDENT
+			;
+
+primary			: IDENT
+			| literal
+			| block
+			| primitive
+			| LPAREN expression RPAREN
+			;
+
+literal			: INTLIT
+			| FLTLIT
+			| CHRLIT
+			| STRLIT
+			| HASH symbol
+			| HASH array
+			;
+
+symbol			: IDENT
+			| BINSEL
+			| KEYWORD
+			| KEYWORDS
+			;
+
+array			: LPAREN elements RPAREN
+			;
+
+elements		: /* empty */
+			| INTLIT elements
+			| FLTLIT elements
+			| CHRLIT elements
+			| STRLIT elements
+			| symbol elements
+			| array elements
+			;
+
+block			: LBRACK blockArgs statements RBRACK
+			;
+
+blockArgs		: /* empty */
+			| blockArgList BAR
+			;
+
+blockArgList		: /* empty */
+			| COLONVAR blockArgList
+			;
+
+primitive		: PRIMBGN INTLIT primaries PRIMEND
+			;
+
+primaries		: /* empty */
+			| primary primaries
+			;

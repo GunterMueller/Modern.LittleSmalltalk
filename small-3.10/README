@@ -1,0 +1,17 @@
+
+This is Little Smalltalk version 3.10, originally written by Tim Budd
+and then extensively hacked by Hellwig Geisse.
+
+Please read the document install.ms (to typeset use troff -ms) for
+installation instructions.
+
+The document manual.ms provides the start of a manual; it needs to
+be rewritten.
+
+Please report bugs, and one of these days I (Tim Budd) may even find
+time to fix them! You can also report bugs to me (Hellwig Geisse) and
+I will try my best to fix them.
+
+--tim budd
+--Hellwig Geisse
+

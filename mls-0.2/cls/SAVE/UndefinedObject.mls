@@ -1,0 +1,5 @@
+*
+* UndefinedObject.mls -- the class of 'nil'
+*
+
+Class UndefinedObject Object

@@ -1,0 +1,15 @@
+Class Test1 Object a b
+Class Test2 Test1 c d
+Class Test3 Test2 e f
+Methods Test1
+  test1
+    ^ 42
+]
+Methods Test2
+  test2
+    ^ 42
+]
+Methods Test3
+  test3
+    ^ 42
+]

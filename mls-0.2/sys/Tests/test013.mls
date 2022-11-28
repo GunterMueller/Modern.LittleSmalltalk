@@ -1,0 +1,9 @@
+Class Test Object a b
+Methods Test
+  test: x and: y
+    | v w |
+    a <- 1.
+    b <- 2.
+    v <- w <- 0.
+    ^ 42
+]

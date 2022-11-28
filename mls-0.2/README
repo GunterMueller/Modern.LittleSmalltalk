@@ -1,0 +1,15 @@
+
+Welcome to Modern Little Smalltalk!
+
+This is a re-implementation of Little Smalltalk,
+an object-oriented language and corresponding class
+library written many years ago by Tim Budd of Oregon
+State University. It is similar to Smalltalk-80, but
+approximately an order of magnitude less complex.
+
+Please report bugs to Hellwig.Geisse@mni.fh-giessen.de;
+he did not necessarily make them all by himself, but he
+feels responsible for fixing them ;-)
+
+Have fun!
+

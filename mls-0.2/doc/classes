@@ -1,0 +1,56 @@
+*
+* basic.mls
+*
+Class Object nil
+Class Block Object context argCount argLoc bytePointer
+Class Boolean Object
+Class    True Boolean
+Class    False Boolean
+Class Class Object name instanceSize methods superClass variables
+Class Context Object linkLocation method arguments temporaries
+Class Integer Object
+Class Method Object text message bytecodes literals stackSize temporarySize
+clas
+s watch
+Class Smalltalk Object
+Class Switch Object const notdone
+Class Symbol Object
+Class UndefinedObject Object
+
+*
+* collect.mls
+*
+Class Link Object key value nextLink
+Class Collection Magnitude
+Class    IndexedCollection Collection
+Class       Array IndexedCollection
+Class          ByteArray Array
+Class             String ByteArray
+Class       Dictionary IndexedCollection hashTable
+Class    Interval Collection lower upper step
+Class    List Collection links
+Class       Set List
+
+*
+* file.mls
+*
+Class File Object name number mode
+
+*
+* mag.mls
+*
+Class Magnitude Object
+Class    Char Magnitude value
+Class    Number Magnitude
+Class       Integer Number
+Class           LongInteger Integer negative digits
+Class       Fraction Number top bottom
+Class       Float Number
+Class Random Object
+
+*
+* mult.mls
+*
+Class Process Object stack stackTop linkPointer
+Class Scheduler Object notdone processList currentProcess
+Class Semaphore Object count processList

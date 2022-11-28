@@ -1,0 +1,32 @@
+*
+* Magnitude.mls -- the magnitude classes
+*
+
+Class Magnitude Object
+Class     Character Magnitude
+Class     Number Magnitude
+Class         Integer Number
+Class             ShortInteger Integer
+Class         Float Number
+
+Methods ShortInteger
+    + aShortInteger
+        "Add aShortInteger to the receiver."
+        ^<! 60 self aShortInteger !>
+|
+    - aShortInteger
+        "Subtract aShortInteger from the receiver."
+        ^<! 61 self aShortInteger !>
+|
+    * aShortInteger
+        "Multiply the receiver with aShortInteger."
+        ^<! 68 self aShortInteger !>
+|
+    // aShortInteger
+        "Divide the receiver by aShortInteger, return the quotient."
+        ^<! 69 self aShortInteger !>
+|
+    \\ aShortInteger
+        "Divide the receiver by aShortInteger, return the remainder."
+        ^<! 67 self aShortInteger !>
+]

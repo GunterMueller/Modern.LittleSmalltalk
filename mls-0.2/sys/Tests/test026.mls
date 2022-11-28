@@ -1,0 +1,5 @@
+Class Test Object a b
+Methods Test
+  test
+    ^ 4 and: 5 sin and: 6 + 6 or: 7 or: 8
+]

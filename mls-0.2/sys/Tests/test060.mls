@@ -1,0 +1,81 @@
+Class Test Object a b
+Methods Test
+  test1
+|
+  test2
+    42
+|
+  test3
+    ^42
+|
+  test4
+    ^4.2
+|
+  test5
+    ^$a
+|
+  test6
+    ^'this is a string'
+|
+  test7
+    a <- b.
+    ^42
+|
+  test8
+    a <- b <- 42
+|
+  test9
+    | x y z |
+    x <- y <- z <- a <- b
+|
+  test10
+    <! 42 self 1024 !>
+|
+  test11
+    a <- <! 42 self 1024 !>
+|
+  test12
+    2 + 3 ; - 7 + 3 ; * 4
+|
+  test13
+    ^ 2 + 3 ; - 7 + 3 ; * 4
+|
+  test14
+    ^ []
+|
+  test15
+    ^ [ 42 ]
+|
+  test16
+    ^ [ ^42 ]
+|
+  test17
+    ^ [ 1 a: 2 a: 3 a: 4 ]
+|
+  test18
+    ^ [ 1 a: 2 a: [ 10 b: 11 b: 12 ] a: 4 ]
+|
+  test19
+    ^ [:x | x + 1]
+|
+  test20
+    ^ [:x :y :z | 1 + x con: 2 + y con: 3 + z]
+|
+  test21
+    ^ [:x :y :z | x + y + z] value: 1 value: 2 value: 3
+|
+  test22
+    ^ [:x :y :z | 42 con: x con: y con: z] value: 1 value: 2 value: 3
+|
+  test23
+    ^ [:x :y | x + y] value: 1 value: 2
+|
+  test24
+    ^ #aSymbol
+|
+  test25
+    ^ Class
+|
+  test26
+    ^ #(1 2 3 (4) 5 6 7)
+]

@@ -1,0 +1,139 @@
+*
+* Collection.mls -- the collection classes
+*
+
+Class         Collection Object
+Class             SequenceableCollection Collection
+Class                 ArrayedCollection SequenceableCollection
+VarClass                  Array ArrayedCollection
+VarWordClass              WordArray ArrayedCollection
+VarByteClass              String ArrayedCollection
+VarByteClass                  Symbol String
+Class             Dictionary Collection hashTable
+Class                 SystemDictionary Dictionary
+
+Methods SystemDictionary
+    startUp
+        "Start the Modern Little Smalltalk system."
+        self topLevelLoop
+|
+    test1
+        "This is just a test."
+|
+    test2
+        "This is just a test."
+        ^self
+|
+    test3
+        "This is just a test."
+        ^nil
+|
+    test4
+        "This is just a test."
+        ^false
+|
+    test5
+        "This is just a test."
+        ^true
+|
+    test6
+        "This is just a test."
+        ^42
+|
+    test7
+        "This is just a test."
+        ^42.42
+|
+    test8
+        "This is just a test."
+        ^$a
+|
+    test9
+        "This is just a test."
+        ^'this is a string'
+|
+    test10
+        "This is just a test."
+        ^#aSymbol
+|
+    test11
+        "This is just a test."
+        ^SystemDictionary
+|
+    test12
+        "This is just a test."
+        ^#(1 2 3 (4) 5 6 7)
+|
+    test13
+        "This is just a test."
+        Class <- 42.
+        ^Class
+|
+    test14
+        "This is just a test."
+        self shutDown
+|
+    test15
+        "This is just a test."
+        self halt
+|
+    test16
+        "This is just a test."
+        ^7 class
+|
+    test17
+        "This is just a test."
+        ^3 + 4
+|
+    test18
+        "This is just a test."
+        ^3 - 4
+|
+    test19
+        "This is just a test."
+        ^3 * 4
+|
+    test20
+        "This is just a test."
+        ^14 // 4
+|
+    test21
+        "This is just a test."
+        ^14 \\ 4
+|
+    test22
+        "This is just a test."
+        ^[]
+|
+    test23
+        "This is just a test."
+        ^[] value
+|
+    test24
+        "This is just a test."
+        ^[42]
+|
+    test25
+        "This is just a test."
+        ^[42] value
+|
+    test26
+        "This is just a test."
+        [^42]
+|
+    test27
+        "This is just a test."
+        [^42] value
+|
+    test28
+        "This is just a test."
+        ^[:x :y :z | x + y + z] value: 1 value: 2 value: 3
+|
+    topLevelLoop
+        "This is the top level loop."
+        [true] whileTrue: []
+|
+    shutDown
+        "Stop the Modern Little Smalltalk system."
+        <! 7 !>
+]
